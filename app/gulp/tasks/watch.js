@@ -18,4 +18,4 @@ const changed = (cb) => {
 watch('./app/index.html', changed);
 watch('./app/assets/styles/**/*.css', styles);
 
-exports.default = start;
+module.exports = start;

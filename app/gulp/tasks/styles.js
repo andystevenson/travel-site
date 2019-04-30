@@ -18,4 +18,4 @@ const injectCss = (cb) => {
     .pipe(browsersync.stream());
 }
 
-exports.default = series(styles, injectCss);
+module.exports = series(styles, injectCss);
