@@ -1,4 +1,13 @@
-const gulp = require('gulp');
+require('./gulp/tasks/styles');
+require('./gulp/tasks/watch');
 
 
-module.exports.default = require('./app/gulp/tasks/watch');
+
+
+
+
+
+
+
+
+
