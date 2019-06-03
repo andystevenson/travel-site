@@ -42,7 +42,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -52,11 +52,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var mm = new _MobileMenu2.default();
+	var mobileMenu = new _MobileMenu2.default();
 
-/***/ }),
+/***/ },
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -78,23 +78,23 @@
 	  function MobileMenu() {
 	    _classCallCheck(this, MobileMenu);
 
-	    this.header = (0, _jquery2.default)(".site-header");
-	    this.icon = (0, _jquery2.default)(".site-header__menu-icon");
-	    this.content = (0, _jquery2.default)(".site-header__menu-content");
+	    this.siteHeader = (0, _jquery2.default)(".site-header");
+	    this.menuIcon = (0, _jquery2.default)(".site-header__menu-icon");
+	    this.menuContent = (0, _jquery2.default)(".site-header__menu-content");
 	    this.events();
 	  }
 
 	  _createClass(MobileMenu, [{
 	    key: "events",
 	    value: function events() {
-	      this.icon.click(this.toggleMenu.bind(this));
+	      this.menuIcon.click(this.toggleTheMenu.bind(this));
 	    }
 	  }, {
-	    key: "toggleMenu",
-	    value: function toggleMenu() {
-	      this.header.toggleClass("site-header--is-expanded");
-	      this.content.toggleClass("site-header__menu-content--is-visible");
-	      this.icon.toggleClass("site-header__menu-icon--close-x");
+	    key: "toggleTheMenu",
+	    value: function toggleTheMenu() {
+	      this.menuContent.toggleClass("site-header__menu-content--is-visible");
+	      this.siteHeader.toggleClass("site-header--is-expanded");
+	      this.menuIcon.toggleClass("site-header__menu-icon--close-x");
 	    }
 	  }]);
 
@@ -103,9 +103,9 @@
 
 	exports.default = MobileMenu;
 
-/***/ }),
+/***/ },
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	 * jQuery JavaScript Library v2.2.4
@@ -9923,5 +9923,5 @@
 	}));
 
 
-/***/ })
+/***/ }
 /******/ ]);

@@ -2,20 +2,20 @@ import $ from 'jquery';
 
 class MobileMenu {
   constructor() {
-    this.header = $(".site-header");
-    this.icon = $(".site-header__menu-icon");
-    this.content = $(".site-header__menu-content");
+    this.siteHeader = $(".site-header");
+    this.menuIcon = $(".site-header__menu-icon");
+    this.menuContent = $(".site-header__menu-content");
     this.events();
   }
 
   events() {
-    this.icon.click(this.toggleMenu.bind(this));
+    this.menuIcon.click(this.toggleTheMenu.bind(this));
   }
 
-  toggleMenu() {
-    this.header.toggleClass("site-header--is-expanded");
-    this.content.toggleClass("site-header__menu-content--is-visible");
-    this.icon.toggleClass("site-header__menu-icon--close-x");
+  toggleTheMenu() {
+    this.menuContent.toggleClass("site-header__menu-content--is-visible");
+    this.siteHeader.toggleClass("site-header--is-expanded");
+    this.menuIcon.toggleClass("site-header__menu-icon--close-x");
   }
 }
 

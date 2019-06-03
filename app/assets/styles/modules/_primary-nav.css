@@ -19,9 +19,8 @@
 
   li {
     list-style: none;
-    padding-right: 7px;
     display: inline-block;
-
+    padding-right: 7px;
     @mixin atMedium {
       padding-right: 20px;
       float: left;
@@ -46,8 +45,8 @@
     background-color: rgba($mainBlue, .5);
 
     @mixin atMedium {
-      padding: 12px 0;
       font-size: 1rem;
+      padding: 12px 0;
       background-color: transparent;
     }
   }

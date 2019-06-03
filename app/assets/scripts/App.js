@@ -1,4 +1,3 @@
+import MobileMenu from './modules/MobileMenu';
 
-import MobileMenu from './modules/MobileMenu.js';
-
-const mm = new MobileMenu;
+var mobileMenu = new MobileMenu();
