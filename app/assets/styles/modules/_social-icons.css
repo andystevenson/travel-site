@@ -10,13 +10,13 @@
     position: relative;
 
     @mixin atSmall {
-      margin: 0 5px;
       width: 72px;
+      margin: 0 5px;
     }
 
     .icon {
-      position: absolute;
       display: block;
+      position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);

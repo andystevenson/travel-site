@@ -54,6 +54,10 @@
 
 	var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
 
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	var _StickyHeader = __webpack_require__(5);
 
 	var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
@@ -62,19 +66,12 @@
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
-	var _jquery = __webpack_require__(2);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mobileMenu = new _MobileMenu2.default();
-
 	new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
 	new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
-
 	var stickyHeader = new _StickyHeader2.default();
-
 	var modal = new _Modal2.default();
 
 /***/ }),
@@ -9971,11 +9968,11 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var RevealOnScroll = function () {
-	  function RevealOnScroll(selector, offset) {
+	  function RevealOnScroll(els, offset) {
 	    _classCallCheck(this, RevealOnScroll);
 
-	    this.itemsToReveal = selector;
-	    this.offset = offset;
+	    this.itemsToReveal = els;
+	    this.offsetPercentage = offset;
 	    this.hideInitially();
 	    this.createWaypoints();
 	  }
@@ -9988,15 +9985,15 @@
 	  }, {
 	    key: 'createWaypoints',
 	    value: function createWaypoints() {
-	      var self = this;
+	      var that = this;
 	      this.itemsToReveal.each(function () {
-	        var item = this;
+	        var currentItem = this;
 	        new Waypoint({
-	          element: item,
+	          element: currentItem,
 	          handler: function handler() {
-	            (0, _jquery2.default)(item).addClass("reveal-item--is-visible");
+	            (0, _jquery2.default)(currentItem).addClass("reveal-item--is-visible");
 	          },
-	          offset: self.offset
+	          offset: that.offsetPercentage
 	        });
 	      });
 	    }
@@ -10809,33 +10806,33 @@
 	    this.pageSections = (0, _jquery2.default)(".page-section");
 	    this.headerLinks = (0, _jquery2.default)(".primary-nav a");
 	    this.createPageSectionWaypoints();
-	    this.addSmoothScroll();
+	    this.addSmoothScrolling();
 	    this.refreshWaypoints();
 	  }
 
 	  _createClass(StickyHeader, [{
 	    key: 'refreshWaypoints',
 	    value: function refreshWaypoints() {
-	      this.lazyImages.on('load', function () {
+	      this.lazyImages.load(function () {
 	        Waypoint.refreshAll();
 	      });
 	    }
 	  }, {
-	    key: 'addSmoothScroll',
-	    value: function addSmoothScroll() {
+	    key: 'addSmoothScrolling',
+	    value: function addSmoothScrolling() {
 	      this.headerLinks.smoothScroll();
 	    }
 	  }, {
 	    key: 'createHeaderWaypoint',
 	    value: function createHeaderWaypoint() {
-	      var self = this;
+	      var that = this;
 	      new Waypoint({
-	        element: self.headerTriggerElement[0],
+	        element: this.headerTriggerElement[0],
 	        handler: function handler(direction) {
 	          if (direction == "down") {
-	            self.siteHeader.addClass("site-header--dark");
+	            that.siteHeader.addClass("site-header--dark");
 	          } else {
-	            self.siteHeader.removeClass("site-header--dark");
+	            that.siteHeader.removeClass("site-header--dark");
 	          }
 	        }
 	      });
@@ -10843,28 +10840,28 @@
 	  }, {
 	    key: 'createPageSectionWaypoints',
 	    value: function createPageSectionWaypoints() {
-	      var self = this;
-	      self.pageSections.each(function () {
-	        var page = this;
+	      var that = this;
+	      this.pageSections.each(function () {
+	        var currentPageSection = this;
 	        new Waypoint({
-	          element: page,
+	          element: currentPageSection,
 	          handler: function handler(direction) {
 	            if (direction == "down") {
-	              var link = page.getAttribute("data-matching-link");
-	              self.headerLinks.removeClass("is-current-link");
-	              (0, _jquery2.default)(link).addClass("is-current-link");
+	              var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
+	              that.headerLinks.removeClass("is-current-link");
+	              (0, _jquery2.default)(matchingHeaderLink).addClass("is-current-link");
 	            }
 	          },
 	          offset: "18%"
 	        });
 
 	        new Waypoint({
-	          element: page,
+	          element: currentPageSection,
 	          handler: function handler(direction) {
 	            if (direction == "up") {
-	              var link = page.getAttribute("data-matching-link");
-	              self.headerLinks.removeClass("is-current-link");
-	              (0, _jquery2.default)(link).addClass("is-current-link");
+	              var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
+	              that.headerLinks.removeClass("is-current-link");
+	              (0, _jquery2.default)(matchingHeaderLink).addClass("is-current-link");
 	            }
 	          },
 	          offset: "-40%"
@@ -11275,15 +11272,19 @@
 	  _createClass(Modal, [{
 	    key: "events",
 	    value: function events() {
+	      // clicking the open modal button
 	      this.openModalButton.click(this.openModal.bind(this));
+
+	      // clicking the x close modal button
 	      this.closeModalButton.click(this.closeModal.bind(this));
+
+	      // pushes any key
 	      (0, _jquery2.default)(document).keyup(this.keyPressHandler.bind(this));
 	    }
 	  }, {
 	    key: "keyPressHandler",
 	    value: function keyPressHandler(e) {
-	      var ESC = 27;
-	      if (e.keyCode == ESC) {
+	      if (e.keyCode == 27) {
 	        this.closeModal();
 	      }
 	    }

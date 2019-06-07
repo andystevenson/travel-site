@@ -2,7 +2,6 @@ import $ from 'jquery';
 import waypoints from '../../../../node_modules/waypoints/lib/noframework.waypoints';
 import smoothScroll from 'jquery-smooth-scroll';
 
-
 class StickyHeader {
   constructor() {
     this.lazyImages = $(".lazyload");
@@ -10,64 +9,64 @@ class StickyHeader {
     this.headerTriggerElement = $(".large-hero__title");
     this.createHeaderWaypoint();
     this.pageSections = $(".page-section");
-    this.headerLinks = $(".primary-nav a")
+    this.headerLinks = $(".primary-nav a");
     this.createPageSectionWaypoints();
-    this.addSmoothScroll();
+    this.addSmoothScrolling();
     this.refreshWaypoints();
   }
 
   refreshWaypoints() {
-    this.lazyImages.on('load', function () {
+    this.lazyImages.load(function() {
       Waypoint.refreshAll();
     });
   }
 
-  addSmoothScroll() {
+  addSmoothScrolling() {
     this.headerLinks.smoothScroll();
   }
 
   createHeaderWaypoint() {
-    const self = this;
+    var that = this;
     new Waypoint({
-      element: self.headerTriggerElement[0],
-      handler: function (direction) {
+      element: this.headerTriggerElement[0],
+      handler: function(direction) {
         if (direction == "down") {
-          self.siteHeader.addClass("site-header--dark");
+          that.siteHeader.addClass("site-header--dark");
         } else {
-          self.siteHeader.removeClass("site-header--dark")
+          that.siteHeader.removeClass("site-header--dark");
         }
-      },
+      }
     });
   }
 
   createPageSectionWaypoints() {
-    const self = this;
-    self.pageSections.each(function () {
-      const page = this;
+    var that = this;
+    this.pageSections.each(function() {
+      var currentPageSection = this;
       new Waypoint({
-        element: page,
-        handler: function (direction) {
+        element: currentPageSection,
+        handler: function(direction) {
           if (direction == "down") {
-            const link = page.getAttribute("data-matching-link");
-            self.headerLinks.removeClass("is-current-link");
-            $(link).addClass("is-current-link");
+            var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
+            that.headerLinks.removeClass("is-current-link");
+            $(matchingHeaderLink).addClass("is-current-link");
           }
         },
-        offset: "18%",
+        offset: "18%"
       });
 
       new Waypoint({
-        element: page,
-        handler: function (direction) {
+        element: currentPageSection,
+        handler: function(direction) {
           if (direction == "up") {
-            const link = page.getAttribute("data-matching-link");
-            self.headerLinks.removeClass("is-current-link");
-            $(link).addClass("is-current-link");
+            var matchingHeaderLink = currentPageSection.getAttribute("data-matching-link");
+            that.headerLinks.removeClass("is-current-link");
+            $(matchingHeaderLink).addClass("is-current-link");
           }
         },
-        offset: "-40%",
+        offset: "-40%"
       });
-    })
+    });
   }
 }
 
